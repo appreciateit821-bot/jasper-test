@@ -31,17 +31,31 @@ function navigateTo(url) {
 
 // --- Shared: Scroll Reveal ---
 function initScrollReveal() {
-    const observer = new IntersectionObserver((entries) => {
+    const selector = '.reveal, .reveal-left, .reveal-right, .writing-paragraph';
+
+    const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.1 });
 
-    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .writing-paragraph').forEach(el => {
-        observer.observe(el);
-    });
+    // Observe existing elements
+    document.querySelectorAll(selector).forEach(el => io.observe(el));
+
+    // Watch for dynamically added elements (e.g. painting.js gallery)
+    new MutationObserver((mutations) => {
+        mutations.forEach(m => {
+            m.addedNodes.forEach(node => {
+                if (node.nodeType !== 1) return;
+                if (node.matches && node.matches(selector)) io.observe(node);
+                if (node.querySelectorAll) {
+                    node.querySelectorAll(selector).forEach(el => io.observe(el));
+                }
+            });
+        });
+    }).observe(document.body, { childList: true, subtree: true });
 }
 
 // --- Main Page Logic ---
