@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painting - Jasper</title>
+    <meta name="description" content="Jasper's painting portfolio - Oil paintings and mixed media works.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="page-painting">
+    <div id="particle-container"></div>
+    <div class="page-transition"></div>
+
+    <a href="index.html" class="back-nav" onclick="event.preventDefault(); navigateTo('index.html');">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Back</span>
+    </a>
+
+    <div class="painting-page page-content">
+        <h1 class="section-header">Paintings</h1>
+        <p class="section-subheader" style="text-align:center;">A journey through color, texture, and emotion</p>
+
+        <div class="gallery-grid" id="gallery-grid">
+            <!-- Gallery items injected by painting.js -->
+        </div>
+    </div>
+
+    <!-- Room View Overlay -->
+    <div class="room-overlay" id="room-overlay">
+        <button class="room-close" id="room-close">&times;</button>
+        <div class="room-view" id="room-view">
+            <img class="room-painting" id="room-painting" src="" alt="Painting in room">
+        </div>
+    </div>
+
+    <!-- Artist Note -->
+    <div class="artist-note" id="artist-note">
+        <div class="artist-note-title">Artist's Note</div>
+        <div class="artist-note-text" id="artist-note-text"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="main.js"></script>
+    <script src="painting.js"></script>
+</body>
+</html>

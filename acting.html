@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acting - Jasper</title>
+    <meta name="description" content="Jasper's acting portfolio - Script analysis and performance.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="page-acting">
+    <div id="particle-container"></div>
+    <div class="page-transition"></div>
+
+    <a href="index.html" class="back-nav" onclick="event.preventDefault(); navigateTo('index.html');">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Back</span>
+    </a>
+
+    <div class="acting-page page-content">
+        <h1 class="section-header">Acting</h1>
+        <p class="section-subheader" style="text-align:center;">Where analysis meets emotion — script study and performance</p>
+
+        <div class="acting-split">
+            <!-- Script Analysis Panel -->
+            <div class="script-panel" id="script-panel">
+                <div class="script-panel-title">Script Analysis</div>
+                <!-- Script blocks injected by acting.js -->
+            </div>
+
+            <!-- Video + Timeline -->
+            <div class="video-panel">
+                <div class="video-main" id="video-main">
+                    <div class="video-placeholder">
+                        <span>Select a scene to begin</span>
+                    </div>
+                </div>
+                <div class="timeline-markers" id="timeline-markers">
+                    <!-- Markers injected by acting.js -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="main.js"></script>
+    <script src="acting.js"></script>
+</body>
+</html>

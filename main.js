@@ -1,141 +1,101 @@
-      document.addEventListener('DOMContentLoaded', () => {
-          const particleContainer = document.getElementById('particle-container');
-          const orbitContainer = document.querySelector('.orbit-container');
-          const satellites = document.querySelectorAll('.satellite');
-          const core = document.getElementById('jasper-core');
-          
-          const previewContainer = document.getElementById('preview-container');
-          const closePreviewBtn = document.getElementById('close-preview');
-          const galleries = {
-              painting: document.getElementById('painting-preview'),
-              acting: document.getElementById('acting-preview'),
-              writing: document.getElementById('writing-preview')
-          };
+/* ============================================
+   JASPER PORTFOLIO - Main Page + Shared Utils
+   ============================================ */
 
-          // --- Mock Data ---
-          const previewData = {
-              painting: [
-                  'https://images.unsplash.com/photo-1531241136452-e565613c7c64?q=80&w=1964&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1569792998835-c907c3a723e7?q=80&w=1974&auto=format&fit=crop',
-                  'https://images.unsplash.com/photo-1525909002-15104b216a3e?q=80&w=2070&auto=format&fit=crop'
-              ],
-              acting: [], // Add URLs for acting thumbnails/videos
-              writing: [] // Add snippets for writing
-          };
+// --- Shared: Particle System ---
+function createParticles(container, count) {
+    if (!container) return;
+    for (let i = 0; i < count; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        const size = Math.random() * 3 + 1;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particle.style.animationDelay = `${Math.random() * 3}s`;
+        container.appendChild(particle);
+    }
+}
 
-          // --- 1. Particle Effect ---
-          function createParticles() {
-              for (let i = 0; i < 50; i++) {
-                  const particle = document.createElement('div');
-                  particle.classList.add('particle');
-                  const size = Math.random() * 3 + 1;
-                  particle.style.width = `${size}px`;
-                  particle.style.height = `${size}px`;
-                  particle.style.left = `${Math.random() * 100}%`;
-                  particle.style.top = `${Math.random() * 100}%`;
-                  particle.style.animationDelay = `${Math.random() * 3}s`;
-                  particleContainer.appendChild(particle);
-              }
-          }
+// --- Shared: Page Transition ---
+function navigateTo(url) {
+    const transition = document.querySelector('.page-transition');
+    if (transition) {
+        transition.classList.add('active');
+        setTimeout(() => { window.location.href = url; }, 500);
+    } else {
+        window.location.href = url;
+    }
+}
 
-          // --- 2. Satellite Orbit Calculation ---
-          function updateSatellitePositions() {
-              const time = Date.now() * 0.0001;
-              satellites.forEach((satellite, index) => {
-                  const angle = time + (index * (2 * Math.PI / satellites.length));
-                  const x = Math.cos(angle) * 300;
-                  const z = Math.sin(angle) * 300;
-                  satellite.style.transform = `translateX(${x}px) translateZ(${z}px) rotateY(${-angle}rad)`;
-              });
-              requestAnimationFrame(updateSatellitePositions);
-          }
-
-          // --- 3. Interactive Animations ---
-          satellites.forEach(satellite => {
-              satellite.addEventListener('click', () => {
-                  const category = satellite.dataset.category;
-                  openPreview(satellite, category);
-              });
-          });
-
-          function openPreview(selectedSatellite, category) {
-              // Animate satellites
-              anime.timeline({ easing: 'easeInOutExpo' })
-                  .add({
-                      targets: satellites,
-                      opacity: [1, 0],
-                      scale: [1, 0.5],
-                      duration: 400,
-                      delay: anime.stagger(100, { from: 'center' }),
-                      begin: () => orbitContainer.style.animationPlayState = 'paused'
-                  })
-                  .add({
-                      targets: core,
-                      opacity: [1, 0],
-                      scale: [1, 0.8],
-                      duration: 300,
-                  }, '-=400');
-
-              // Show preview container
-              previewContainer.classList.remove('hidden');
-              anime({
-                  targets: previewContainer,
-                  opacity: [0, 1],
-                  duration: 600
-              });
-
-              // Activate correct gallery
-              Object.values(galleries).forEach(g => g.classList.remove('active'));
-              const activeGallery = galleries[category];
-              activeGallery.classList.add('active');
-              
-              // --- 4. Populate Preview Gallery ---
-              populateGallery(activeGallery, category);
-          }
-
-          closePreviewBtn.addEventListener('click', () => {
-              // Hide preview container
-              anime({
-                  targets: previewContainer,
-                  opacity: [1, 0],
-                  duration: 600,
-                  complete: () => previewContainer.classList.add('hidden')
-              });
-
-              // Animate back
-              anime.timeline({ easing: 'easeInOutExpo' })
-                  .add({
-                      targets: core,
-                      opacity: [0, 1],
-                      scale: [0.8, 1],
-                      duration: 400,
-                  })
-                  .add({
-                      targets: satellites,
-                      opacity: [0, 1],
-                      scale: [0.5, 1],
-                      duration: 500,
-                      delay: anime.stagger(100, { from: 'center' }),
-                      complete: () => orbitContainer.style.animationPlayState = 'running'
-                  }, '-=200');
-          });
-
-          function populateGallery(galleryElement, category) {
-            galleryElement.innerHTML = ''; // Clear previous items
-            if (previewData[category] && previewData[category].length > 0) {
-                previewData[category].forEach(itemUrl => {
-                    const thumb = document.createElement('div');
-                    thumb.className = 'thumbnail';
-                    thumb.style.backgroundImage = `url(${itemUrl})`;
-                    galleryElement.appendChild(thumb);
-                });
-            } else {
-                galleryElement.innerHTML = `<p style="font-size: 1rem; color: #aaa;">Works coming soon.</p>`;
+// --- Shared: Scroll Reveal ---
+function initScrollReveal() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
-        }
+        });
+    }, { threshold: 0.15 });
 
-          // --- Initializations ---
-          createParticles();
-          // Disabling JS-based animation to use CSS animation for the main orbit rotation
-          // updateSatellitePositions(); 
-      });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .writing-paragraph').forEach(el => {
+        observer.observe(el);
+    });
+}
+
+// --- Main Page Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const particleContainer = document.getElementById('particle-container');
+    createParticles(particleContainer, 50);
+
+    // Only run main page logic if on page-main
+    if (!document.body.classList.contains('page-main')) {
+        initScrollReveal();
+        return;
+    }
+
+    const menuItems = document.querySelectorAll('.menu-item');
+    const gemOverlays = document.querySelectorAll('.gem-overlay');
+
+    // Menu hover: project image onto gemstone faces
+    menuItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const previewUrl = item.dataset.preview;
+            if (previewUrl) {
+                gemOverlays.forEach(overlay => {
+                    overlay.style.backgroundImage = `url(${previewUrl})`;
+                    overlay.style.opacity = '1';
+                });
+            }
+        });
+
+        item.addEventListener('mouseleave', () => {
+            gemOverlays.forEach(overlay => {
+                overlay.style.opacity = '0';
+            });
+        });
+
+        // Click: fade out then navigate
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = item.getAttribute('href');
+
+            anime.timeline({ easing: 'easeInOutQuad' })
+                .add({
+                    targets: '.gemstone-container',
+                    opacity: [1, 0],
+                    scale: [1, 0.8],
+                    duration: 400,
+                })
+                .add({
+                    targets: '.menu-item',
+                    opacity: [1, 0],
+                    translateY: [0, -20],
+                    duration: 300,
+                    delay: anime.stagger(60),
+                    complete: () => navigateTo(href)
+                }, '-=300');
+        });
+    });
+});

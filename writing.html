@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing - Jasper</title>
+    <meta name="description" content="Jasper's writing - Prose, poetry, and reflections.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="page-writing">
+    <div id="particle-container"></div>
+    <div class="page-transition"></div>
+
+    <a href="index.html" class="back-nav" onclick="event.preventDefault(); navigateTo('index.html');">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        <span>Back</span>
+    </a>
+
+    <div class="writing-page page-content">
+        <h1 class="section-header">Writing</h1>
+
+        <!-- Piece 1: Korean -->
+        <div class="writing-piece">
+            <h2 class="writing-piece-title">화면 너머의 시간</h2>
+
+            <p class="writing-paragraph" data-mood="#141418">
+                서른다섯의 봄, 나는 처음으로 모니터를 끄고 창밖을 오래 바라보았다. 십오 년간 화면 속에서 세상을 만들어왔다. 코드 한 줄이 수만 명의 일상을 바꾸는 것을 보았고, 서버 한 대가 다운되면 도시의 반이 멈추는 것도 보았다. 내 손끝에서 시작된 알고리즘이 사람들의 아침을 결정하던 시절이었다.
+            </p>
+
+            <p class="writing-paragraph" data-mood="#181420">
+                그런데 그날, 퇴근길에 본 석양이 마음에 걸렸다. 하늘은 테라코타색으로 물들어 있었고, 그 빛이 건물 유리에 반사되어 도시 전체가 하나의 거대한 캔버스처럼 보였다. '이것을 코드로 표현할 수 있을까?' 라는 질문이 떠올랐고, 그 순간 나는 답을 이미 알고 있었다.
+            </p>
+
+            <p class="writing-paragraph" data-mood="#1a1418">
+                불가능하다. 아니, 정확히 말하면 — 가능하지만 의미가 없다. RGB(226, 114, 91)은 테라코타의 색상 코드이지만, 그것은 내가 그날 느낀 경이로움의 그림자조차 되지 못한다. 화면은 빛을 발산하지만 온기를 전하지 못한다. 나는 온기를 전하고 싶었다.
+            </p>
+
+            <p class="writing-paragraph" data-mood="#141a18">
+                그래서 붓을 잡았다. 키보드 대신 팔레트를 들었다. 처음에는 서투르고 민망했다. 스타트업을 세 번이나 성공시킨 사람이 초등학생보다 못한 그림을 그리고 있다니. 하지만 캔버스 앞에 서면 시간이 달랐다. 코딩할 때의 시간은 효율의 단위였지만, 그림을 그릴 때의 시간은 존재의 단위였다.
+            </p>
+
+            <div class="writing-divider"></div>
+        </div>
+
+        <!-- Piece 2: English -->
+        <div class="writing-piece">
+            <h2 class="writing-piece-title">The Space Between Keystrokes</h2>
+
+            <p class="writing-paragraph" data-mood="#121218">
+                There is a moment between pressing a key and seeing the character appear on screen — a gap so small it's measured in milliseconds. For fifteen years, I lived in that gap. I was the architect of invisible bridges, connecting intention to execution at the speed of electricity.
+            </p>
+
+            <p class="writing-paragraph" data-mood="#181218">
+                I built my first company at twenty-two, in a basement office that smelled of instant coffee and ambition. We wrote code that would eventually touch three million users. Three million lives, nudged slightly left or right by my semicolons and curly braces. The weight of that responsibility felt like freedom then. It feels like gravity now.
+            </p>
+
+            <p class="writing-paragraph" data-mood="#121820">
+                The second company was bigger. The third was bigger still. With each iteration, I became more fluent in the language of scale — server clusters, user acquisition funnels, conversion rates. I could read a dashboard the way a pianist reads sheet music: instantly, intuitively, and with complete emotional detachment.
+            </p>
+
+            <p class="writing-paragraph" data-mood="#1a1614">
+                That detachment is what saved me. And what nearly destroyed me.
+            </p>
+
+            <p class="writing-paragraph" data-mood="#161418">
+                Because somewhere between Series A and IPO, between the keynote speeches and the magazine covers, I forgot what it felt like to make something with my hands. Something imperfect. Something that couldn't be A/B tested or optimized or scaled. Something that existed purely because I willed it into being.
+            </p>
+
+            <p class="writing-paragraph" data-mood="#141a1a">
+                Now I paint. Now I act. Now I write these words, not for three million users, but for myself — and perhaps for you, if you've found your way here. The space between keystrokes has become the space between brushstrokes, between breaths on stage, between one sentence and the next. It's still a gap measured in milliseconds. But now, that gap is where I live.
+            </p>
+
+            <div class="writing-divider"></div>
+        </div>
+    </div>
+
+    <!-- Sound Console -->
+    <div class="sound-console" id="sound-console">
+        <div class="sound-console-title">Ambient Sound</div>
+        <button class="sound-btn" data-sound="rain">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m0 0l-3-3m3 3l3-3M4 14a4 4 0 014-4h8a4 4 0 110 8H8a4 4 0 01-4-4z"/></svg>
+            Rain
+        </button>
+        <button class="sound-btn" data-sound="fire">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c-4-3-8-6-8-11a8 8 0 0116 0c0 5-4 8-8 11z"/></svg>
+            Fireplace
+        </button>
+        <button class="sound-btn" data-sound="ambient">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12a4 4 0 018 0"/></svg>
+            Ambient
+        </button>
+        <div class="volume-control">
+            <label>Vol</label>
+            <input type="range" class="volume-slider" id="volume-slider" min="0" max="100" value="40">
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="main.js"></script>
+    <script src="writing.js"></script>
+</body>
+</html>

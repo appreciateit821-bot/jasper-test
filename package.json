@@ -11,5 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "lite-server": "^2.6.1"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^24.37.3"
   }
 }

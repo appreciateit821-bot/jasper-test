@@ -1,51 +1,58 @@
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Jasper - The Orbit of Creation</title>
-          <link rel="stylesheet" href="style.css">
-          <link rel="preconnect" href="https://fonts.googleapis.com">
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-          <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-      </head>
-      <body>
-          <div id="particle-container"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jasper - Artist Portfolio</title>
+    <meta name="description" content="Jasper - IT entrepreneur turned artist. Painting, Acting, Writing.">
+    <meta property="og:title" content="Jasper - Artist Portfolio">
+    <meta property="og:description" content="IT entrepreneur turned artist exploring painting, acting, and writing.">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body class="page-main">
+    <div id="particle-container"></div>
+    <div class="page-transition"></div>
 
-          <main class="universe-container">
-              <div class="core-container">
-                  <div id="jasper-core">JASPER</div>
-              </div>
+    <main class="universe-container">
+        <!-- 3D Jasper Gemstone -->
+        <div class="gemstone-container">
+            <div class="gemstone">
+                <div class="gem-face gem-face-front"><div class="gem-overlay"></div></div>
+                <div class="gem-face gem-face-back"><div class="gem-overlay"></div></div>
+                <div class="gem-face gem-face-right"><div class="gem-overlay"></div></div>
+                <div class="gem-face gem-face-left"><div class="gem-overlay"></div></div>
+                <div class="gem-face gem-face-top"><div class="gem-overlay"></div></div>
+                <div class="gem-face gem-face-bottom"><div class="gem-overlay"></div></div>
+            </div>
+            <div class="gemstone-label">JASPER</div>
+        </div>
 
-              <div class="orbit-container">
-                  <!-- Satellites -->
-                  <div class="satellite" id="painting-satellite" data-category="painting">
-                      <div class="satellite-label">Painting</div>
-                  </div>
-                  <div class="satellite" id="acting-satellite" data-category="acting">
-                      <div class="satellite-label">Acting</div>
-                  </div>
-                  <div class="satellite" id="writing-satellite" data-category="writing">
-                      <div class="satellite-label">Writing</div>
-                  </div>
-              </div>
+        <!-- Floating Navigation Menu -->
+        <div class="floating-menu">
+            <a href="painting.html" class="menu-item menu-item--painting" data-category="painting" data-preview="images/preview/painting.jpg">
+                <div class="menu-item-label">Painting</div>
+                <div class="menu-item-sub">Oil on Canvas</div>
+            </a>
+            <a href="acting.html" class="menu-item menu-item--acting" data-category="acting" data-preview="images/preview/acting.jpg">
+                <div class="menu-item-label">Acting</div>
+                <div class="menu-item-sub">Stage & Screen</div>
+            </a>
+            <a href="writing.html" class="menu-item menu-item--writing" data-category="writing" data-preview="images/preview/writing.jpg">
+                <div class="menu-item-label">Writing</div>
+                <div class="menu-item-sub">Prose & Poetry</div>
+            </a>
+            <a href="about.html" class="menu-item menu-item--about" data-category="about" data-preview="images/preview/about.jpg">
+                <div class="menu-item-label">About</div>
+                <div class="menu-item-sub">The Journey</div>
+            </a>
+        </div>
+    </main>
 
-              <!-- Preview Galleries -->
-              <div id="preview-container" class="hidden">
-                  <button id="close-preview">&times;</button>
-                  <div id="painting-preview" class="preview-gallery">
-                      <!-- Painting thumbnails will be injected here -->
-                  </div>
-                  <div id="acting-preview" class="preview-gallery">
-                      <!-- Acting video thumbnails will be injected here -->
-                  </div>
-                  <div id="writing-preview" class="preview-gallery">
-                      <!-- Writing snippets will be injected here -->
-                  </div>
-              </div>
-          </main>
-
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-          <script src="main.js"></script>
-      </body>
-      </html>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
