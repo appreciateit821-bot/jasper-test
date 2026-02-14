@@ -74,45 +74,18 @@ function initNewsletterForm() {
         submitButton.disabled = true;
         submitButton.textContent = 'Subscribing...';
 
-        try {
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzV6tV6B-uppZ1ed7nDuiSu2YVXz-U2Go4XTwA5Ahhqg9nmtSBmKfN0r7wIa2m3d16j/exec';
-            await fetch(`${scriptUrl}?email=${encodeURIComponent(email)}`, {
-                method: 'GET',
-                mode: 'no-cors',
-            });
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbzV6tV6B-uppZ1ed7nDuiSu2YVXz-U2Go4XTwA5Ahhqg9nmtSBmKfN0r7wIa2m3d16j/exec';
+        fetch(`${scriptUrl}?email=${encodeURIComponent(email)}`, {
+            method: 'GET',
+            mode: 'no-cors',
+        });
 
-            {
-                anime({
-                    targets: formInner,
-                    opacity: 0,
-                    duration: 400,
-                    easing: 'easeInOutQuad',
-                    complete: () => {
-                        formInner.innerHTML = `
-                            <div class="newsletter-success">
-                                <h2 class="newsletter-title">Thank You!</h2>
-                                <p class="newsletter-desc">You're on the list. We'll be in touch shortly.</p>
-                            </div>
-                        `;
-                        formInner.style.opacity = 1;
-                        anime({
-                            targets: formInner.querySelector('.newsletter-success'),
-                            opacity: [0, 1],
-                            translateY: [20, 0],
-                            duration: 500,
-                            easing: 'easeOutExpo'
-                        });
-                    }
-                });
-            }
-        } catch (error) {
-            console.error('Subscription failed:', error);
-            const note = formInner.querySelector('.newsletter-note');
-            note.textContent = 'Submission failed. Please try again.';
-            note.style.color = '#ff8a80'; 
-            submitButton.disabled = false;
-            submitButton.textContent = 'Subscribe';
-        }
+        formInner.innerHTML = `
+            <div class="newsletter-success">
+                <h2 class="newsletter-title">Thank You!</h2>
+                <p class="newsletter-desc">You're on the list. We'll be in touch shortly.</p>
+            </div>
+        `;
     });
 }
 
