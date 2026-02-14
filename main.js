@@ -75,10 +75,7 @@ function initNewsletterForm() {
         submitButton.textContent = 'Subscribing...';
 
         const scriptUrl = 'https://script.google.com/macros/s/AKfycbzV6tV6B-uppZ1ed7nDuiSu2YVXz-U2Go4XTwA5Ahhqg9nmtSBmKfN0r7wIa2m3d16j/exec';
-        fetch(`${scriptUrl}?email=${encodeURIComponent(email)}`, {
-            method: 'GET',
-            mode: 'no-cors',
-        });
+        new Image().src = `${scriptUrl}?email=${encodeURIComponent(email)}`;
 
         formInner.innerHTML = `
             <div class="newsletter-success">
