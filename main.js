@@ -75,14 +75,13 @@ function initNewsletterForm() {
         submitButton.textContent = 'Subscribing...';
 
         try {
-            const response = await fetch('https://script.google.com/macros/s/AKfycbxLUqOyHpn8zWOT8WJtmzoFTOrsd0Zsy3nKmDYyruUCj7TEIEdAdAGQ3Gf5g4-3uxbg/exec', {
-                method: 'POST',
-                body: JSON.stringify({ email }),
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzV6tV6B-uppZ1ed7nDuiSu2YVXz-U2Go4XTwA5Ahhqg9nmtSBmKfN0r7wIa2m3d16j/exec';
+            await fetch(`${scriptUrl}?email=${encodeURIComponent(email)}`, {
+                method: 'GET',
+                mode: 'no-cors',
             });
 
-            const result = await response.json();
-
-            if (result.result === 'success') {
+            {
                 anime({
                     targets: formInner,
                     opacity: 0,
@@ -105,8 +104,6 @@ function initNewsletterForm() {
                         });
                     }
                 });
-            } else {
-                throw new Error(result.message || 'Something went wrong.');
             }
         } catch (error) {
             console.error('Subscription failed:', error);
