@@ -1,7 +1,11 @@
 {
-  "name": "jasper-test",
-  "compatibility_date": "2026-02-14",
-  "assets": {
-    "directory": "./"
-  }
+  "name": "portfolio-worker",
+  "main": "functions/subscribe.js",
+  "compatibility_date": "2023-11-21",
+  "routes": [
+    {
+      "pattern": "/api/subscribe",
+      "script": "portfolio-worker"
+    }
+  ]
 }

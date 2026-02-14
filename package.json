@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lite-server": "^2.6.1"
+    "heic-convert": "^2.1.0",
+    "lite-server": "^2.6.1",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "puppeteer-core": "^24.37.3"

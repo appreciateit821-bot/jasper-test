@@ -41,10 +41,8 @@ function initScrollReveal() {
         });
     }, { threshold: 0.1 });
 
-    // Observe existing elements
     document.querySelectorAll(selector).forEach(el => io.observe(el));
 
-    // Watch for dynamically added elements (e.g. painting.js gallery)
     new MutationObserver((mutations) => {
         mutations.forEach(m => {
             m.addedNodes.forEach(node => {
@@ -58,21 +56,86 @@ function initScrollReveal() {
     }).observe(document.body, { childList: true, subtree: true });
 }
 
+// --- Newsletter Form AJAX Submission ---
+function initNewsletterForm() {
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (!newsletterForm) return;
+
+    const formInner = newsletterForm.closest('.newsletter-inner');
+
+    newsletterForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const emailInput = newsletterForm.querySelector('input[name="email"]');
+        const submitButton = newsletterForm.querySelector('button[type="submit"]');
+        const email = emailInput.value;
+
+        if (!email) return;
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Subscribing...';
+
+        try {
+            const response = await fetch('https://script.google.com/macros/s/AKfycbxLUqOyHpn8zWOT8WJtmzoFTOrsd0Zsy3nKmDYyruUCj7TEIEdAdAGQ3Gf5g4-3uxbg/exec', {
+                method: 'POST',
+                body: JSON.stringify({ email }),
+            });
+
+            const result = await response.json();
+
+            if (result.result === 'success') {
+                anime({
+                    targets: formInner,
+                    opacity: 0,
+                    duration: 400,
+                    easing: 'easeInOutQuad',
+                    complete: () => {
+                        formInner.innerHTML = `
+                            <div class="newsletter-success">
+                                <h2 class="newsletter-title">Thank You!</h2>
+                                <p class="newsletter-desc">You're on the list. We'll be in touch shortly.</p>
+                            </div>
+                        `;
+                        formInner.style.opacity = 1;
+                        anime({
+                            targets: formInner.querySelector('.newsletter-success'),
+                            opacity: [0, 1],
+                            translateY: [20, 0],
+                            duration: 500,
+                            easing: 'easeOutExpo'
+                        });
+                    }
+                });
+            } else {
+                throw new Error(result.message || 'Something went wrong.');
+            }
+        } catch (error) {
+            console.error('Subscription failed:', error);
+            const note = formInner.querySelector('.newsletter-note');
+            note.textContent = 'Submission failed. Please try again.';
+            note.style.color = '#ff8a80'; 
+            submitButton.disabled = false;
+            submitButton.textContent = 'Subscribe';
+        }
+    });
+}
+
 // --- Main Page Logic ---
 document.addEventListener('DOMContentLoaded', () => {
-    const particleContainer = document.getElementById('particle-container');
-    createParticles(particleContainer, 50);
+    initNewsletterForm();
+    initScrollReveal();
 
-    // Only run main page logic if on page-main
+    const particleContainer = document.getElementById('particle-container');
+    if (particleContainer) {
+        createParticles(particleContainer, 50);
+    }
+
     if (!document.body.classList.contains('page-main')) {
-        initScrollReveal();
         return;
     }
 
     const menuItems = document.querySelectorAll('.menu-item');
     const gemOverlays = document.querySelectorAll('.gem-overlay');
 
-    // Menu hover: project image onto gemstone faces
     menuItems.forEach(item => {
         item.addEventListener('mouseenter', () => {
             const previewUrl = item.dataset.preview;
@@ -90,7 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Click: fade out then navigate
         item.addEventListener('click', (e) => {
             e.preventDefault();
             const href = item.getAttribute('href');
