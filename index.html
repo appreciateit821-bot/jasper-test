@@ -1,14 +1,84 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
-</head>
-<body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
-</body>
-</html>
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Online Art Gallery</title>
+          <link rel="stylesheet" href="style.css">
+          <link rel="preconnect" href="https://fonts.googleapis.com">
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+          <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+      </head>
+      <body>
+          <!-- Top Navigation -->
+          <nav class="top-nav">
+              <div class="nav-brand">Gallery</div>
+              <div class="nav-actions">
+                  <div class="search-wrapper">
+                      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="11" cy="11" r="8"></circle>
+                          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                      </svg>
+                      <input type="text" id="search-input" placeholder="Search artworks..." autocomplete="off">
+                  </div>
+                  <button id="dark-mode-toggle" aria-label="Toggle dark mode">
+                      <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <circle cx="12" cy="12" r="5"></circle>
+                          <line x1="12" y1="1" x2="12" y2="3"></line>
+                          <line x1="12" y1="21" x2="12" y2="23"></line>
+                          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                          <line x1="1" y1="12" x2="3" y2="12"></line>
+                          <line x1="21" y1="12" x2="23" y2="12"></line>
+                          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                      </svg>
+                      <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                      </svg>
+                  </button>
+              </div>
+          </nav>
+
+          <!-- Hero Section -->
+          <header class="hero-section">
+              <div class="hero-text">
+                  <h1>Discover the Soul of Canvas</h1>
+                  <p>An exclusive collection of contemporary oil paintings by Jane Doe.</p>
+              </div>
+          </header>
+
+          <main>
+              <!-- Filter Bar -->
+              <div class="filter-bar">
+                  <button class="filter-btn active" data-filter="all">All</button>
+                  <button class="filter-btn" data-filter="landscapes">Landscapes</button>
+                  <button class="filter-btn" data-filter="portraits">Portraits</button>
+                  <button class="filter-btn" data-filter="abstract">Abstract</button>
+              </div>
+
+              <!-- Art Gallery -->
+              <div class="art-gallery" id="gallery">
+                  <!-- Artworks will be dynamically injected here by main.js -->
+              </div>
+          </main>
+          
+          <section class="virtual-tour-section">
+              <h2>Virtual Tour</h2>
+              <p>Experience the gallery in a whole new way. Take a guided virtual tour and discover the stories behind the art.</p>
+              <button id="start-tour-btn" class="tour-btn">Take a Virtual Tour</button>
+          </section>
+
+          <!-- Modal for Virtual Tour -->
+          <div id="tour-modal" class="modal">
+              <div class="modal-content">
+                  <span class="close-button">&times;</span>
+                  <h2>Welcome to the Virtual Tour</h2>
+                  <p>This guided tour will take you through the gallery, highlighting key pieces and providing insights from the artist. Are you ready to begin?</p>
+                  <button id="begin-tour-btn" class="tour-btn">Start Tour</button>
+              </div>
+          </div>
+          
+          <script src="main.js"></script>
+      </body>
+      </html>
