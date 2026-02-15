@@ -74,7 +74,7 @@ function initNewsletterForm() {
         submitButton.disabled = true;
         submitButton.textContent = 'Subscribing...';
 
-        const scriptUrl = 'https://script.google.com/macros/s/AKfycbzV6tV6B-uppZ1ed7nDuiSu2YVXz-U2Go4XTwA5Ahhqg9nmtSBmKfN0r7wIa2m3d16j/exec';
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbx1SNsurZTYIYzK4oU1MAcKzADtFiwi9K8zxO3_RjLQrUlVYvpVoqfJN-h9bVm6XbYx/exec';
         new Image().src = `${scriptUrl}?email=${encodeURIComponent(email)}`;
 
         formInner.innerHTML = `
